@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1d4ed8">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<title>Diário de Pressão — Família Araújo</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--ink:#10172f;--muted:#687385;--brand:#1d4ed8;--brand2:#2563eb;--green:#15956a;--greenbg:#e9fbf2;--red:#dc2626;--redbg:#fff1f1;--orange:#ea8a00;--soft:#eef4ff;--line:#d7e3f5;--shadow:0 18px 50px rgba(20,31,60,.10);--radius:26px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:linear-gradient(180deg,#f7f9fe,#edf2fa);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);padding-bottom:100px}
+.top{padding:22px 22px 30px;border-bottom-left-radius:34px;border-bottom-right-radius:34px;background:linear-gradient(135deg,#1e40af,#2563eb);color:#fff;box-shadow:0 18px 45px rgba(29,78,216,.24);display:flex;gap:16px;align-items:center}
+.top img{width:88px;height:88px;border-radius:14px;object-fit:cover;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.top h1{font-size:27px;line-height:1.05;margin:0 0 7px;font-weight:900}.top p{margin:0;font-size:17px;opacity:.95}.install{margin-left:auto;border:0;background:#fff;color:#11172d;padding:13px 16px;border-radius:18px;font-weight:900;font-size:16px}
+main{padding:22px}.card{background:var(--card);border:1px solid rgba(17,24,39,.06);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:20px}
+h2{font-size:30px;margin:0 0 8px}h3{font-size:25px;margin:0 0 16px}.muted{color:var(--muted);font-size:17px;line-height:1.4}
+.hero{text-align:center}.hero .face{font-size:60px}.hero p{font-size:20px;color:var(--muted);line-height:1.35}
+.btn{width:100%;border:0;border-radius:20px;padding:20px 16px;font-size:23px;font-weight:950;color:#fff;margin-top:10px}.primary{background:linear-gradient(135deg,#2563eb,#1d4ed8);box-shadow:0 12px 28px rgba(37,99,235,.22)}.green{background:var(--green)}.secondary{background:#eef3ff;color:#11172d;box-shadow:none}.danger{background:var(--redbg);color:var(--red);border:2px solid #fecaca;box-shadow:none}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.quick button{border:1px solid #dbe5ff;background:#f7faff;border-radius:18px;padding:15px 8px;font-weight:900;font-size:17px;color:#1d4ed8}
+.bp-card{display:grid;grid-template-columns:1fr 24px 1fr;gap:8px;align-items:center;margin:16px 0}.bp-num{font-size:48px;font-weight:950;text-align:center;background:#f8fafc;border:1px solid #e5e9f2;border-radius:20px;padding:14px 4px}.bp-sep{font-size:30px;text-align:center;color:#64748b;font-weight:900}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{background:#f8fafc;border:1px solid #e5e9f2;border-radius:18px;padding:14px;text-align:center}.metric b{display:block;font-size:28px}.metric span{color:var(--muted);font-size:15px}
+.status{padding:15px 17px;border-radius:18px;border:1px solid;margin-top:14px;font-weight:850}.status.ok{background:var(--greenbg);border-color:#cbeed7;color:var(--green)}.status.warn{background:#fff8e8;border-color:#ffe1a3;color:#a15c00}.status.alert{background:var(--redbg);border-color:#fecaca;color:var(--red)}
+.tabs{position:fixed;left:10px;right:10px;bottom:10px;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border:1px solid #e7ecf5;border-radius:23px;display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:8px;box-shadow:0 12px 40px rgba(20,31,60,.14);z-index:20}.tab{border:0;background:transparent;border-radius:17px;padding:8px 3px;font-size:14px;font-weight:850;color:#596477}.tab.active{background:#eaf1ff;color:#155bc0}.tab .ico{display:block;font-size:25px}.hidden{display:none}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid #e5e9f2;border-radius:18px;padding:15px;margin:10px 0;background:#fff}.row b{font-size:18px}.tag{border-radius:999px;padding:6px 10px;font-weight:900;font-size:14px;white-space:nowrap}.tag.ok{background:var(--greenbg);color:var(--green)}.tag.warn{background:#fff7e8;color:#a15c00}.tag.alert{background:var(--redbg);color:var(--red)}
+label{display:block;font-weight:900;font-size:17px;margin:14px 0 7px}input,select,textarea{width:100%;font:inherit;font-size:19px;padding:14px;border:1px solid #dbe2ee;border-radius:15px;background:#fff;color:var(--ink)}textarea{min-height:80px;resize:vertical}
+.type-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.type{border:1px solid #dbe2ee;background:#fff;border-radius:15px;padding:12px 5px;text-align:center;font-weight:850}.type.active{border-color:#2563eb;background:#eef4ff;color:#1d4ed8}
+.session{border:1px solid #e5e9f2;border-radius:20px;padding:15px;margin:12px 0;background:#fff}.session-head{display:flex;justify-content:space-between;align-items:center}.session-head b{font-size:18px}.session-val{font-size:32px;font-weight:950;margin:7px 0}.session-meta{color:var(--muted);font-size:15px}.session-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.session-actions button{border:0;border-radius:13px;padding:10px;font-weight:900}.edit{background:#eef4ff;color:#1d4ed8}.del{background:#fff1f1;color:#dc2626}
+.range-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.notice{background:#f8fafc;border:1px solid #e5e9f2;border-radius:17px;padding:14px;color:#475569;line-height:1.4}
+small{color:var(--muted)}canvas{width:100%;height:260px;background:#fff;border:1px solid #e5e9f2;border-radius:18px}
+@media(max-width:560px){main{padding:17px}.top h1{font-size:24px}.top img{width:78px;height:78px}.install{padding:11px 12px;font-size:14px}.card{padding:19px}.bp-num{font-size:40px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <img src="logo.jpg" alt="Família Araújo">
+  <div><h1>Diário de Pressão</h1><p>Família Araújo • acompanhamento</p></div>
+  <button class="install" id="installBtn" type="button" onclick="installApp()" aria-label="Instalar aplicativo">Instalar</button>
+</header>
+
+<main>
+<section id="home">
+  <div class="card hero">
+    <div class="face">❤️</div>
+    <h2 id="hello">Olá!</h2>
+    <p id="today"></p>
+    <div id="todayStatus" class="status ok">Pronto para registrar.</div>
+    <button class="btn primary" onclick="openMeasurement()">➕ REGISTRAR PRESSÃO</button>
+    <div class="quick">
+      <button onclick="openMeasurement('morning')">☀️ Manhã</button>
+      <button onclick="openMeasurement('afternoon')">🌤️ Tarde</button>
+      <button onclick="openMeasurement('night')">🌙 Noite</button>
+      <button onclick="openMedication()">💊 Medicamento</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📌 Última medição</h3>
+    <div id="lastBox"></div>
+  </div>
+
+  <div class="card">
+    <h3>📊 Resumo de hoje</h3>
+    <div class="grid2">
+      <div class="metric"><b id="todayCount">0</b><span>Medições</span></div>
+      <div class="metric"><b id="todayAvg">—</b><span>Média</span></div>
+      <div class="metric"><b id="todayMax">—</b><span>Maior</span></div>
+      <div class="metric"><b id="todayPulse">—</b><span>Pulso médio</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="history" class="hidden">
+  <div class="card">
+    <h3>📚 Histórico</h3>
+    <p class="muted">Todas as medições ficam guardadas no aparelho. Use o filtro para consultar os últimos dias.</p>
+    <div class="range-row"><div><label>De</label><input type="date" id="fromDate"></div><div><label>Até</label><input type="date" id="toDate"></div></div>
+    <button class="btn secondary" onclick="renderHistory()">🔎 Consultar</button>
+    <div id="historyList"></div>
+  </div>
+</section>
+
+<section id="charts" class="hidden">
+  <div class="card">
+    <h3>📈 Evolução</h3>
+    <p class="muted">Visão das medições dos últimos 30 dias. A linha ajuda a perceber tendências; não substitui a avaliação médica.</p>
+    <canvas id="chart" width="900" height="500"></canvas>
+    <div class="grid2" style="margin-top:12px">
+      <div class="metric"><b id="avg30">—</b><span>Média 30 dias</span></div>
+      <div class="metric"><b id="n30">0</b><span>Medições</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>🗓️ Acompanhamento de 30 dias</h3>
+    <div id="thirtyDays"></div>
+  </div>
+</section>
+
+<section id="settings" class="hidden">
+  <div class="card">
+    <h3>👤 Pessoa acompanhada</h3>
+    <label>Nome</label><input id="patientName" placeholder="Reginaldo">
+    <label>Período do acompanhamento</label>
+    <div class="range-row"><input type="date" id="startDate"><input type="date" id="endDate"></div>
+    <button class="btn green" onclick="saveProfile()">💾 Salvar</button>
+  </div>
+
+  <div class="card">
+    <h3>⏰ Horários das medições</h3>
+    <p class="muted">Deixei três horários como padrão para manhã, tarde e noite. Você pode alterar conforme a orientação médica.</p>
+    <label>☀️ Manhã</label><input type="time" id="timeMorning">
+    <label>🌤️ Tarde</label><input type="time" id="timeAfternoon">
+    <label>🌙 Noite</label><input type="time" id="timeNight">
+    <button class="btn green" onclick="saveSchedule()">💾 Salvar horários</button>
+  </div>
+
+  <div class="card">
+    <h3>💊 Medicamento</h3>
+    <label>Nome do medicamento</label><input id="medName" placeholder="Ex.: Valsartana">
+    <label>Dose prescrita</label><input id="medDose" placeholder="Confirme a dose na receita">
+    <label>Horário</label><input type="time" id="medTime">
+    <button class="btn green" onclick="saveMedication()">💾 Salvar medicamento</button>
+    <div class="notice" style="margin-top:12px">O aplicativo apenas registra o que foi prescrito. Não altere dose ou horário por conta própria.</div>
+  </div>
+
+  <div class="card">
+    <h3>🔔 Lembretes</h3>
+    <p class="muted">Ative as notificações do navegador/aplicativo para receber lembretes dos horários cadastrados.</p>
+    <button class="btn primary" onclick="enableNotifications()">Ativar notificações</button>
+    <button class="btn secondary" onclick="testNotification()">Testar notificação</button>
+  </div>
+
+  <div class="card">
+    <h3>💾 Segurança dos dados</h3>
+    <p class="muted">Faça backup com frequência. O backup contém o histórico e as configurações deste aparelho.</p>
+    <button class="btn primary" onclick="exportBackup()">⬇️ Exportar backup</button>
+    <button class="btn secondary" onclick="document.getElementById('importFile').click()">⬆️ Importar backup</button>
+    <input type="file" id="importFile" accept="application/json" hidden onchange="importBackup(event)">
+    <button class="btn danger" onclick="clearAll()">Apagar todos os dados</button>
+  </div>
+
+  <div class="card">
+    <h3>⚠️ Limites e segurança</h3>
+    <div class="notice">
+      <b>O aplicativo não diagnostica nem ajusta tratamento.</b><br>
+      Os limites de alerta devem seguir a orientação do seu médico, especialmente por você ter mencionado acompanhamento da aorta.
+      Se houver uma leitura muito elevada ou sintomas importantes, procure orientação médica/serviço de emergência em vez de depender do aplicativo.
+    </div>
+  </div>
+</section>
+</main>
+
+<nav class="tabs">
+<button class="tab active" data-tab="home"><span class="ico">🏠</span>Início</button>
+<button class="tab" data-tab="history"><span class="ico">📚</span>Histórico</button>
+<button class="tab" data-tab="charts"><span class="ico">📈</span>Gráficos</button>
+<button class="tab" data-tab="settings"><span class="ico">⚙️</span>Ajustes</button>
+</nav>
+
+<div id="modal" class="hidden"></div>
+<div id="toast" style="position:fixed;left:20px;right:20px;bottom:90px;background:#11172d;color:#fff;padding:15px;border-radius:17px;text-align:center;font-weight:900;opacity:0;transform:translateY(10px);transition:.25s;z-index:50"></div>
+
+<script>
+const APP='diario_pressao_familia_araujo_v2';
+const K={profile:APP+'_profile',records:APP+'_records',schedule:APP+'_schedule',med:APP+'_med'};
+const $=id=>document.getElementById(id);
+let records=load(K.records,[]);
+
+function load(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}}
+function save(k,v){localStorage.setItem(k,JSON.stringify(v))}
+function iso(d=new Date()){let x=new Date(d);return new Date(x.getTime()-x.getTimezoneOffset()*60000).toISOString().slice(0,10)}
+function now(){return new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}
+function profile(){return load(K.profile,{name:'Reginaldo',start:iso(),end:iso(Date.now()+29*86400000)})}
+function schedule(){return load(K.schedule,{morning:'06:40',afternoon:'16:14',night:'21:00'})}
+function medication(){return load(K.med,{name:'',dose:'',time:''})}
+function toast(t){let e=$('toast');e.textContent=t;e.style.opacity=1;e.style.transform='translateY(0)';setTimeout(()=>{e.style.opacity=0;e.style.transform='translateY(10px)'},1900)}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function greet(){let h=new Date().getHours();return h<12?'Bom dia':h<18?'Boa tarde':'Boa noite'}
+function dayLabel(d){return new Date(d+'T12:00:00').toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'2-digit'})}
+function classify(s,d){if(s>=180||d>=120)return ['alert','Atenção'];if(s>=140||d>=90)return ['warn','Elevada'];return ['ok','Registrada']}
+function typeLabel(t){return t==='morning'?'☀️ Manhã':t==='afternoon'?'🌤️ Tarde':t==='night'?'🌙 Noite':'🕐 Extra'}
+function todayRecords(){return records.filter(r=>r.date===iso()).sort((a,b)=>a.ts-b.ts)}
+function allSorted(){return [...records].sort((a,b)=>b.ts-a.ts)}
+function avg(a){return a.length?Math.round(a.reduce((x,r)=>x+r.s,0)/a.length)+' × '+Math.round(a.reduce((x,r)=>x+r.d,0)/a.length):'—'}
+let deferredInstallPrompt=null;
+function isInstalled(){return window.matchMedia('(display-mode: standalone)').matches || window.matchMedia('(display-mode: fullscreen)').matches || window.navigator.standalone===true;}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;const b=$('installBtn');if(b)b.textContent='Instalar';});
+window.addEventListener('appinstalled',()=>{deferredInstallPrompt=null;const b=$('installBtn');if(b){b.textContent='Instalado ✓';b.disabled=true;}});
+async function installApp(){
+  if(isInstalled()){
+    toast('O aplicativo já está instalado ❤️');
+    return;
+  }
+  if(deferredInstallPrompt){
+    try{
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+    }catch(e){}
+    deferredInstallPrompt=null;
+    return;
+  }
+  alert('O Chrome não liberou a instalação automática neste momento. Toque no menu ⋮ do Chrome e escolha “Instalar aplicativo” ou “Adicionar à tela inicial”.');
+}
+function updateInstallButton(){
+  const b=$('installBtn'); if(!b)return;
+  if(isInstalled()){b.textContent='Instalado ✓';b.disabled=true;return;}
+  b.textContent='Instalar'; b.disabled=false;
+}
+function render(){
+  let p=profile();$('hello').textContent=greet()+', '+p.name+'!';
+  $('today').textContent=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  let tr=todayRecords(), last=allSorted()[0];
+  $('todayCount').textContent=tr.length;$('todayAvg').textContent=avg(tr);
+  $('todayMax').textContent=tr.length?Math.max(...tr.map(r=>r.s))+' × '+tr.find(r=>r.s===Math.max(...tr.map(x=>x.s))).d:'—';
+  $('todayPulse').textContent=tr.filter(r=>r.pulse).length?Math.round(tr.filter(r=>r.pulse).reduce((a,r)=>a+r.pulse,0)/tr.filter(r=>r.pulse).length):'—';
+  let st=$('todayStatus');let high=tr.find(r=>r.s>=180||r.d>=120);st.className='status '+(high?'alert':tr.some(r=>r.s>=140||r.d>=90)?'warn':'ok');st.textContent=high?'Há uma medição que merece atenção imediata.':tr.some(r=>r.s>=140||r.d>=90)?'Há medições elevadas hoje. Veja o histórico e siga a orientação médica.':'Nenhuma medição de hoje está marcada como elevada.';
+  $('lastBox').innerHTML=last?`<div class="bp-card"><div class="bp-num">${last.s}</div><div class="bp-sep">×</div><div class="bp-num">${last.d}</div></div><div class="session-meta">🕐 ${new Date(last.ts).toLocaleString('pt-BR')} • ${typeLabel(last.period)}${last.pulse?' • ❤️ '+last.pulse+' bpm':''}</div><div class="status ${classify(last.s,last.d)[0]}">${classify(last.s,last.d)[1]}</div>`:'<p class="muted">Nenhuma medição registrada ainda.</p>';
+  renderHistory();renderCharts();fillSettings();
+}
+function openMeasurement(period='', existing=null){
+  let r=existing || (period?{period}:null);
+  $('modal').className='';
+  $('modal').innerHTML=`<div style="position:fixed;inset:0;background:rgba(15,23,42,.48);z-index:40;display:flex;align-items:flex-end;padding:14px"><div class="card" style="width:100%;max-width:560px;margin:auto;max-height:92vh;overflow:auto"><h3>❤️ Registrar pressão</h3><p class="muted">Registre a medida feita agora. Se você fizer duas medidas na mesma sessão, salve cada uma separadamente.</p>
+<div class="range-row"><div><label>Data</label><input id="mDate" type="date" value="${r?.date||iso()}"></div><div><label>Horário</label><input id="mTime" type="time" value="${r?.time||now()}"></div></div>
+<label>Momento</label><div class="type-grid">${[['morning','☀️ Manhã'],['afternoon','🌤️ Tarde'],['night','🌙 Noite']].map(x=>`<button class="type ${r?.period===x[0]?'active':''}" onclick="pickPeriod('${x[0]}')">${x[1]}</button>`).join('')}</div>
+<input type="hidden" id="mPeriod" value="${r?.period||''}">
+<label>Sistólica (número de cima)</label><input id="mS" type="number" inputmode="numeric" min="60" max="300" value="${r?.s??''}" placeholder="Ex.: 130">
+<label>Diastólica (número de baixo)</label><input id="mD" type="number" inputmode="numeric" min="30" max="200" value="${r?.d??''}" placeholder="Ex.: 80">
+<label>Frequência cardíaca (opcional)</label><input id="mP" type="number" inputmode="numeric" min="30" max="220" value="${r?.pulse??''}" placeholder="Ex.: 72">
+<label>Observação (opcional)</label><textarea id="mNote" placeholder="Ex.: antes do café, após repouso, dor de cabeça...">${esc(r?.note||'')}</textarea>
+<div class="session-actions"><button class="secondary" onclick="closeModal()">Cancelar</button><button class="btn primary" style="margin:0" onclick="saveMeasurement('${existing?.id||''}')">Salvar</button></div></div></div>`;
+}
+function pickPeriod(p){$('mPeriod').value=p;document.querySelectorAll('.type').forEach(b=>b.classList.remove('active'));event.currentTarget.classList.add('active')}
+function closeModal(){$('modal').className='hidden';$('modal').innerHTML=''}
+function saveMeasurement(existingId=''){
+ let date=$('mDate').value||iso(), time=$('mTime').value||now();
+ let s=Number($('mS').value),d=Number($('mD').value),p=Number($('mP').value)||null;
+ if(!s||!d||s<60||d<30){alert('Informe a pressão sistólica e diastólica.');return}
+ let stamp=new Date(`${date}T${time}:00`).getTime();
+ if(Number.isNaN(stamp)){alert('Data ou horário inválidos.');return}
+ let rec={id:existingId||((crypto.randomUUID&&crypto.randomUUID())||String(Date.now())),date,ts:stamp,time,s,d,pulse:p,period:$('mPeriod').value||'extra',note:$('mNote').value.trim()};
+ if(existingId){let i=records.findIndex(x=>x.id===existingId);if(i>=0)records[i]=rec;else records.push(rec)}
+ else records.push(rec);
+ save(K.records,records);closeModal();toast(existingId?'Medição atualizada ❤️':'Medição salva com sucesso ❤️');render();
+}
+function editRecord(id){let r=records.find(x=>x.id===id);if(r)openMeasurement(r.period,r)}
+
+function openMedication(){
+ let m=medication();$('modal').className='';$('modal').innerHTML=`<div style="position:fixed;inset:0;background:rgba(15,23,42,.48);z-index:40;display:flex;align-items:flex-end;padding:14px"><div class="card" style="width:100%;max-width:560px;margin:auto"><h3>💊 Registrar medicamento</h3><p class="muted">${esc(m.name||'Medicamento não configurado')} ${m.dose?'• '+esc(m.dose):''}</p><label>Horário tomado</label><input id="takenTime" type="time" value="${now()}"><label>Observação</label><textarea id="medNote" placeholder="Opcional"></textarea><div class="session-actions"><button class="secondary" onclick="closeModal()">Cancelar</button><button class="btn green" style="margin:0" onclick="saveMedicationEvent()">Salvar</button></div></div></div>`
+}
+function saveMedicationEvent(){
+ let m=medication();let ev=load(APP+'_med_events',[]);ev.push({id:Date.now(),date:iso(),ts:Date.now(),time:$('takenTime').value,note:$('medNote').value});save(APP+'_med_events',ev);closeModal();toast('Medicamento registrado');render();
+}
+function renderHistory(){
+ let from=$('fromDate')?.value||iso(Date.now()-29*86400000),to=$('toDate')?.value||iso();
+ if($('fromDate')){$('fromDate').value=from;$('toDate').value=to}
+ let list=records.filter(r=>r.date>=from&&r.date<=to).sort((a,b)=>b.ts-a.ts),el=$('historyList');
+ el.innerHTML=list.length?list.map(r=>{let c=classify(r.s,r.d);return `<div class="session"><div class="session-head"><b>${dayLabel(r.date)} • ${r.time}</b><span class="tag ${c[0]}">${c[1]}</span></div><div class="session-val">${r.s} × ${r.d}</div><div class="session-meta">${typeLabel(r.period)}${r.pulse?' • ❤️ '+r.pulse+' bpm':''}${r.note?' • '+esc(r.note):''}</div><div class="session-actions"><button class="edit" onclick="editRecord('${r.id}')">Editar</button><button class="del" onclick="deleteRecord('${r.id}')">Excluir</button></div></div>`}).join(''):'<p class="muted">Nenhuma medição nesse período.</p>';
+}
+
+function deleteRecord(id){if(confirm('Excluir esta medição?')){records=records.filter(r=>r.id!==id);save(K.records,records);render()}}
+function renderCharts(){
+ let end=new Date();let start=new Date(Date.now()-29*86400000);let rs=records.filter(r=>new Date(r.ts)>=start&&new Date(r.ts)<=end).sort((a,b)=>a.ts-b.ts);
+ $('avg30').textContent=avg(rs);$('n30').textContent=rs.length;
+ let c=$('chart'),ctx=c.getContext('2d'),w=c.width,h=c.height;ctx.clearRect(0,0,w,h);ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);
+ ctx.strokeStyle='#dbe5f2';ctx.lineWidth=2;for(let i=0;i<5;i++){let y=45+i*(h-90)/4;ctx.beginPath();ctx.moveTo(55,y);ctx.lineTo(w-25,y);ctx.stroke()}
+ let vals=rs.flatMap(r=>[r.s,r.d]);let min=Math.max(40,Math.min(...vals,100)-20),max=Math.min(220,Math.max(...vals,140)+20);if(!vals.length){ctx.fillStyle='#687385';ctx.font='24px Arial';ctx.fillText('Sem dados suficientes',300,240)}else{
+   function line(key){ctx.beginPath();rs.forEach((r,i)=>{let x=55+(i/Math.max(1,rs.length-1))*(w-80),y=45+(max-r[key])/(max-min)*(h-90);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke()}
+   ctx.strokeStyle='#2563eb';ctx.lineWidth=5;line('s');ctx.strokeStyle='#16a34a';ctx.lineWidth=4;line('d');
+   ctx.fillStyle='#2563eb';ctx.font='20px Arial';ctx.fillText('— Sistólica',65,22);ctx.fillStyle='#16a34a';ctx.fillText('— Diastólica',210,22);
+ }
+ let p=profile(),rows=[];for(let i=0;i<30;i++){let d=new Date(Date.now()-i*86400000),k=iso(d),rr=records.filter(r=>r.date===k);rows.push(`<div class="row"><b>📅 ${dayLabel(k)}</b><span>${rr.length?avg(rr):'Sem medição'}</span></div>`)}
+ $('thirtyDays').innerHTML=rows.reverse().join('');
+}
+function fillSettings(){
+ let p=profile(),s=schedule(),m=medication();$('patientName').value=p.name;$('startDate').value=p.start;$('endDate').value=p.end;
+ $('timeMorning').value=s.morning;$('timeAfternoon').value=s.afternoon;$('timeNight').value=s.night;
+ $('medName').value=m.name;$('medDose').value=m.dose;$('medTime').value=m.time;
+}
+function saveProfile(){let name=$('patientName').value.trim()||'Reginaldo';let start=$('startDate').value||iso();let end=$('endDate').value||iso(Date.now()+29*86400000);save(K.profile,{name,start,end});toast('Dados salvos');render()}
+function saveSchedule(){save(K.schedule,{morning:$('timeMorning').value||'06:40',afternoon:$('timeAfternoon').value||'16:14',night:$('timeNight').value||'21:00'});toast('Horários salvos')}
+function saveMedication(){save(K.med,{name:$('medName').value.trim(),dose:$('medDose').value.trim(),time:$('medTime').value});toast('Medicamento salvo')}
+function exportBackup(){
+ let data={app:APP,version:1,exportedAt:new Date().toISOString(),profile:profile(),schedule:schedule(),medication:medication(),records,medicationEvents:load(APP+'_med_events',[])};
+ let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.download='backup_diario_pressao_familia_araujo.json';a.click()
+}
+function importBackup(ev){let f=ev.target.files?.[0];if(!f)return;let rd=new FileReader();rd.onload=()=>{try{let d=JSON.parse(rd.result);if(d.profile)save(K.profile,d.profile);if(d.schedule)save(K.schedule,d.schedule);if(d.medication)save(K.med,d.medication);if(d.records)save(K.records,d.records);if(d.medicationEvents)save(APP+'_med_events',d.medicationEvents);records=load(K.records,[]);toast('Backup restaurado');render()}catch(e){alert('Arquivo de backup inválido.')}};rd.readAsText(f)}
+function clearAll(){if(confirm('Isso apagará o histórico deste aparelho. Faça backup antes. Continuar?')){Object.keys(localStorage).filter(k=>k.startsWith(APP)).forEach(k=>localStorage.removeItem(k));records=[];toast('Dados apagados');render()}}
+async function enableNotifications(){
+  if(!('Notification' in window)){
+    alert('O navegador não oferece notificações. Use o Google Chrome no Android.');
+    return;
+  }
+  const permission=await Notification.requestPermission();
+  if(permission==='granted'){
+    toast('Notificações ativadas 🔔');
+    await testNotification();
+  }else if(permission==='denied'){
+    alert('Notificações bloqueadas. No Chrome Android: configurações do site → Permissões → Notificações → Permitir.');
+  }else{
+    alert('A permissão não foi concedida.');
+  }
+}
+async function testNotification(){
+  if(!('Notification' in window)){
+    alert('O navegador não oferece notificações. Abra este endereço no Google Chrome.');
+    return;
+  }
+  let permission=Notification.permission;
+  if(permission!=='granted') permission=await Notification.requestPermission();
+  if(permission!=='granted'){
+    alert('A permissão não foi concedida. No Chrome Android: toque no ícone de ajustes/cadeado ao lado do endereço → Permissões → Notificações → Permitir. Depois volte e toque em “Testar agora”.');
+    return;
+  }
+  const title='Diário de Pressão ❤️';
+  const options={body:'TESTE OK — sua notificação está funcionando!',icon:'./icon-192.png',badge:'./icon-192.png',tag:'diario-pressao-teste',renotify:true};
+  try{
+    if('serviceWorker' in navigator){
+      const reg=await navigator.serviceWorker.ready;
+      if(reg && reg.showNotification){await reg.showNotification(title,options);return;}
+    }
+  }catch(e){}
+  new Notification(title,options);
+}
+function maybeNotify(){
+ if(!('Notification'in window)||Notification.permission!=='granted')return;
+ let d=new Date(),date=iso(d),hm=d.toTimeString().slice(0,5),s=schedule(),targets=[
+  ['morning',s.morning,'Hora da pressão da manhã ☀️'],
+  ['afternoon',s.afternoon,'Hora da pressão da tarde 🌤️'],
+  ['night',s.night,'Hora da pressão da noite 🌙']
+ ];
+ let m=medication();if(m.time)targets.push(['med',m.time,'Hora do medicamento 💊']);
+ let sent=load(APP+'_notif_sent',{});
+ let cur=d.getHours()*60+d.getMinutes();
+ targets.forEach(([key,time,msg])=>{
+  if(!time)return;let [h,mi]=time.split(':').map(Number),target=h*60+mi;
+  if(Math.abs(cur-target)<=1){
+   let k=date+'_'+key+'_'+time;
+   if(!sent[k]){sent[k]=1;save(APP+'_notif_sent',sent);new Notification('Diário de Pressão',{body:msg})}
+  }
+ });
+}
+setInterval(maybeNotify,30000);window.addEventListener('focus',maybeNotify);
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');['home','history','charts','settings'].forEach(id=>$(id).classList.toggle('hidden',id!==b.dataset.tab));render()});
+if('serviceWorker'in navigator){navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(()=>{});}
+updateInstallButton();
+window.addEventListener('load',updateInstallButton);
+render();
+</script>
+</body>
+</html>
